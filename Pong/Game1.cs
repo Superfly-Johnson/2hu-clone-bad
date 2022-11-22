@@ -11,11 +11,7 @@ namespace Pong
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        Texture2D ballTexture;
-        Vector2 ballPosition;
-        float ballSpeed;
-
-        Pawn PlayerPawn = null;
+        Pawn playerPawn = null;
 
         public Game1()
         {
@@ -27,7 +23,7 @@ namespace Pong
         protected override void Initialize()
         {
         // TODO: Add your initialization logic here
-            PlayerPawn = new Pawn(100, 100f, new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2));
+            playerPawn = new Pawn(100, 100f, new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2));
             // ballPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
             // ballSpeed = 100f;
 
@@ -39,7 +35,7 @@ namespace Pong
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            PlayerPawn.Texture = Content.Load<Texture2D>("Pointer");
+            playerPawn.Texture = Content.Load<Texture2D>("Pointer");
         }
 
         protected override void Update(GameTime gameTime)
@@ -49,41 +45,41 @@ namespace Pong
 
             // TODO: Add your update logic here
             var kstate = Keyboard.GetState();
-            Vector2 playerpawnposition = PlayerPawn.Position;
+            Vector2 playerPawnposition = playerPawn.Position;
             if (kstate.IsKeyDown(Keys.Up))
             {
-                playerpawnposition.Y -= PlayerPawn.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                playerPawnposition.Y -= playerPawn.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
             if (kstate.IsKeyDown(Keys.Down))
             {
-                playerpawnposition.Y += PlayerPawn.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                playerPawnposition.Y += playerPawn.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
             if (kstate.IsKeyDown(Keys.Left))
             {
-                playerpawnposition.X -= PlayerPawn.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                playerPawnposition.X -= playerPawn.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
             if (kstate.IsKeyDown(Keys.Right))
             {
-                playerpawnposition.X += PlayerPawn.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                playerPawnposition.X += playerPawn.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            if (playerpawnposition.X > _graphics.PreferredBackBufferWidth - PlayerPawn.Texture.Width / 2)
+            if (playerPawnposition.X > _graphics.PreferredBackBufferWidth - playerPawn.Texture.Width / 2)
             {
-                playerpawnposition.X = _graphics.PreferredBackBufferWidth - PlayerPawn.Texture.Width / 2;
+                playerPawnposition.X = _graphics.PreferredBackBufferWidth - playerPawn.Texture.Width / 2;
             }
-            else if (PlayerPawn.Position.X < PlayerPawn.Texture.Width / 2)
+            else if (playerPawn.Position.X < playerPawn.Texture.Width / 2)
             {
-                playerpawnposition.X = PlayerPawn.Texture.Width / 2;
+                playerPawnposition.X = playerPawn.Texture.Width / 2;
             }
 
-            if (playerpawnposition.Y > _graphics.PreferredBackBufferHeight - PlayerPawn.Texture.Height / 2)
+            if (playerPawnposition.Y > _graphics.PreferredBackBufferHeight - playerPawn.Texture.Height / 2)
             {
-                playerpawnposition.Y = _graphics.PreferredBackBufferHeight - PlayerPawn.Texture.Height / 2;
+                playerPawnposition.Y = _graphics.PreferredBackBufferHeight - playerPawn.Texture.Height / 2;
             }
-            else if (playerpawnposition.Y < PlayerPawn.Texture.Height / 2)
+            else if (playerPawnposition.Y < playerPawn.Texture.Height / 2)
             {
-                playerpawnposition.Y = PlayerPawn.Texture.Height / 2;
+                playerPawnposition.Y = playerPawn.Texture.Height / 2;
             }
-            PlayerPawn.Position = playerpawnposition;
+            playerPawn.Position = playerPawnposition;
             base.Update(gameTime);
         }
 
@@ -93,7 +89,7 @@ namespace Pong
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-            _spriteBatch.Draw(PlayerPawn.Texture, PlayerPawn.Position, null, Color.White, 0f, new Vector2(PlayerPawn.Texture.Width/2, PlayerPawn.Texture.Height/2), Vector2.One, SpriteEffects.None, 0f);
+            _spriteBatch.Draw(playerPawn.Texture, playerPawn.Position, null, Color.White, 0f, new Vector2(playerPawn.Texture.Width/2, playerPawn.Texture.Height/2), Vector2.One, SpriteEffects.None, 0f);
             _spriteBatch.End();
 
             base.Draw(gameTime);
