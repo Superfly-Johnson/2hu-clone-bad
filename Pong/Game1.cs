@@ -49,7 +49,7 @@ namespace Pong
 
             // TODO: Add your update logic here
             var kstate = Keyboard.GetState();
-            var playerpawnposition = PlayerPawn.Position;
+            Vector2 playerpawnposition = PlayerPawn.Position;
             if (kstate.IsKeyDown(Keys.Up))
             {
                 playerpawnposition.Y -= PlayerPawn.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -66,23 +66,24 @@ namespace Pong
             {
                 playerpawnposition.X += PlayerPawn.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            if (playerpawnposition.X > _graphics.PreferredBackBufferWidth - ballTexture.Width / 2)
+            if (playerpawnposition.X > _graphics.PreferredBackBufferWidth - PlayerPawn.Texture.Width / 2)
             {
-                playerpawnposition.X = _graphics.PreferredBackBufferWidth - ballTexture.Width / 2;
+                playerpawnposition.X = _graphics.PreferredBackBufferWidth - PlayerPawn.Texture.Width / 2;
             }
-            else if (PlayerPawn.Position.X < ballTexture.Width / 2)
+            else if (PlayerPawn.Position.X < PlayerPawn.Texture.Width / 2)
             {
-                playerpawnposition.X = ballTexture.Width / 2;
+                playerpawnposition.X = PlayerPawn.Texture.Width / 2;
             }
 
-            if (playerpawnposition.Y > _graphics.PreferredBackBufferHeight - ballTexture.Height / 2)
+            if (playerpawnposition.Y > _graphics.PreferredBackBufferHeight - PlayerPawn.Texture.Height / 2)
             {
-                playerpawnposition.Y = _graphics.PreferredBackBufferHeight - ballTexture.Height / 2;
+                playerpawnposition.Y = _graphics.PreferredBackBufferHeight - PlayerPawn.Texture.Height / 2;
             }
-            else if (playerpawnposition.Y < ballTexture.Height / 2)
+            else if (playerpawnposition.Y < PlayerPawn.Texture.Height / 2)
             {
-                playerpawnposition.Y = ballTexture.Height / 2;
+                playerpawnposition.Y = PlayerPawn.Texture.Height / 2;
             }
+            PlayerPawn.Position = playerpawnposition;
             base.Update(gameTime);
         }
 

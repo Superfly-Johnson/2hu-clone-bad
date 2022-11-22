@@ -33,10 +33,5 @@ namespace Pong.Defs
             Position = initialPosition;
             Speed = speed;
         }
-
-        public void MoveUp()
-        {
-            Position.Y -= PlayerPawn.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-        }
     }
 }
